@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  php-myst:
+    build: .
+    working_dir: /var/www/php-arch
+    container_name: php-myst
+    volumes:
+      - .:/var/www/php-arch
+    networks:
+      - server-side
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/php-arch
+      - ./infra/nginx/conf.d/:/etc/nginx/conf.d
+    networks:
+      - server-side
+    depends_on:
+      - php-myst
+
+networks:
+  server-side:
+    driver: bridge

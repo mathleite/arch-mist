@@ -1,0 +1,21 @@
+{
+    "name": "mathleite/php-arch",
+    "autoload": {
+        "psr-4": {
+            "Mathleite\\PhpArch\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mathleite\\Test\\PhpArch\\": "test/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mathleite"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
