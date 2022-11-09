@@ -17,7 +17,7 @@ services:
       - "8080:80"
     volumes:
       - .:/var/www/php-arch
-      - ./infra/nginx/conf.d/:/etc/nginx/conf.d
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d
     networks:
       - server-side
     depends_on:
