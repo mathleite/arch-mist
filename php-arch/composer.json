@@ -1,5 +1,7 @@
 {
     "name": "mathleite/php-arch",
+    "description": "User login/logout API with its resources",
+    "license": "GPL-3.0-or-later",
     "config": {
         "platform": {
             "php": "8.1"
