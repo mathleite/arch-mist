@@ -26,8 +26,8 @@
         "phpunit/phpunit": "^9.5"
     },
     "require": {
-        "mongodb/mongodb": "1.13.1",
-        "vlucas/phpdotenv": "5.5.0"
+        "mongodb/mongodb": "^1.13.1",
+        "vlucas/phpdotenv": "^5.5.0"
     },
     "scripts": {
         "test": "./vendor/bin/phpunit test"
