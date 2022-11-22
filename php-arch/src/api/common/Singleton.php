@@ -2,9 +2,7 @@
 
 namespace Mathleite\PhpArch\api\common;
 
-use Mathleite\PhpArch\api\common\interfaces\SingletonInterface;
-
-class Singleton implements SingletonInterface
+trait Singleton
 {
     private static array $instances = [];
 
@@ -16,7 +14,7 @@ class Singleton implements SingletonInterface
         throw new \Exception("Cannot unserialize a singleton.");
     }
 
-    public static function getInstance(): SingletonInterface
+    public static function getInstance(): self
     {
         $cls = static::class;
         if (!isset(self::$instances[$cls])) {

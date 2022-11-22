@@ -2,7 +2,7 @@
 
 namespace Mathleite\PhpArch\route;
 
-use InvalidArgumentException;
+use Mathleite\PhpArch\api\common\interfaces\ControllerResponseInterface;
 use Mathleite\PhpArch\api\common\responses\JsonResponse;
 use ReflectionException;
 use ReflectionMethod;
@@ -18,7 +18,7 @@ class SimpleRouter implements RouterInterface
      * @param array $params
      * @return JsonResponse
      */
-    public function dispatch(string $requestAction, array $params = []): JsonResponse
+    public function dispatch(string $requestAction, array $params = []): ControllerResponseInterface
     {
         if (!key_exists($requestAction, $this->routes)) {
             return JsonResponse::getInstance()
@@ -30,7 +30,7 @@ class SimpleRouter implements RouterInterface
             $uriContent = $this->routes[$requestAction];
             $reflectedControllerMethod = new ReflectionMethod($uriContent['namespace'], $uriContent['method']);
             return $reflectedControllerMethod->invokeArgs(new $uriContent['namespace'], $params);
-        } catch (ReflectionException $exception) {
+        } catch (ReflectionException) {
             return JsonResponse::getInstance()
                 ->setData(['status' => self::INTERNAL_ERROR_CODE, 'message' => "Internal server error"])
                 ->setStatusCode(self::INTERNAL_ERROR_CODE);
