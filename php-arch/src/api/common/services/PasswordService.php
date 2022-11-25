@@ -26,15 +26,15 @@ class PasswordService implements HashServiceInterface
 
     private function getPasswordAlgorithmByPasswordLevel(): string
     {
-        $defaultAlgorithm = 'PASSWORD_ARGON2ID';
+        $defaultAlgorithm = PASSWORD_DEFAULT;
         if (!$passwordLevel = getenv(self::PASSWORD_LEVEL_CONFIG)) {
             return $defaultAlgorithm;
         }
 
         return match (strtolower($passwordLevel)) {
-            'low' => 'PASSWORD_DEFAULT',
-            'medium' => 'PASSWORD_BCRYPT',
-            'high' => 'PASSWORD_ARGON2ID',
+            'low' => PASSWORD_DEFAULT,
+            'medium' => PASSWORD_BCRYPT,
+            'high' => PASSWORD_ARGON2ID,
             default => $defaultAlgorithm
         };
     }

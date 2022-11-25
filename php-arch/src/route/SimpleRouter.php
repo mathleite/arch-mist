@@ -3,6 +3,7 @@
 namespace Mathleite\PhpArch\route;
 
 use Mathleite\PhpArch\api\common\interfaces\ControllerResponseInterface;
+use Mathleite\PhpArch\api\common\interfaces\RequestInterface;
 use Mathleite\PhpArch\api\common\responses\JsonResponse;
 use ReflectionException;
 use ReflectionMethod;
@@ -15,10 +16,10 @@ class SimpleRouter implements RouterInterface
 
     /**
      * @param string $requestAction
-     * @param array $params
+     * @param RequestInterface|null $request
      * @return JsonResponse
      */
-    public function dispatch(string $requestAction, array $params = []): ControllerResponseInterface
+    public function dispatch(string $requestAction, ?RequestInterface $request = null): ControllerResponseInterface
     {
         if (!key_exists($requestAction, $this->routes)) {
             return JsonResponse::getInstance()
@@ -29,7 +30,7 @@ class SimpleRouter implements RouterInterface
         try {
             $uriContent = $this->routes[$requestAction];
             $reflectedControllerMethod = new ReflectionMethod($uriContent['namespace'], $uriContent['method']);
-            return $reflectedControllerMethod->invokeArgs(new $uriContent['namespace'], $params);
+            return $reflectedControllerMethod->invokeArgs(new $uriContent['namespace'], [$request]);
         } catch (ReflectionException) {
             return JsonResponse::getInstance()
                 ->setData(['status' => self::INTERNAL_ERROR_CODE, 'message' => "Internal server error"])
