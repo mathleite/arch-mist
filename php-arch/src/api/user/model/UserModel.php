@@ -8,6 +8,7 @@ class UserModel extends AbstractModel
 {
     protected ?string $name = null;
     protected ?string $lastName = null;
+    protected ?string $passwordHash = null;
 
     protected array $fillables = [
         'name',

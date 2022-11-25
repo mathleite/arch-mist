@@ -38,4 +38,21 @@ abstract class AbstractModel
     {
         return in_array($propertyName, $this->fillables);
     }
+
+    public function toArray(bool $onlyFillables = false): array
+    {
+        $properties = get_object_vars($this);
+        if (!empty($properties['fillables'])) {
+            unset($properties['fillables']);
+        }
+
+        $data = [];
+        foreach (array_keys($properties) as $property) {
+            if ($onlyFillables && !$this->isFillable($property)) {
+                continue;
+            }
+            $data[$property] = $this->$property;
+        }
+        return $data;
+    }
 }
