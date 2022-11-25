@@ -14,6 +14,11 @@ class UserModelTest extends TestCase
 
         $this->assertEquals($properties['name'] ?? null, $model->getName());
         $this->assertEquals($properties['lastName'] ?? null, $model->getLastName());
+
+        if (array_key_exists('password', $properties)) {
+            $this->assertArrayNotHasKey('password', $model->toArray());
+            $this->assertFalse($properties['password'] === $model->getPasswordHash());
+        }
     }
 
     public function provideModelAttributes(): iterable
@@ -22,6 +27,7 @@ class UserModelTest extends TestCase
         yield [['name' => 'Lucas', 'lastName' => 0,]];
         yield [['name' => 'XPTO', 'lastName' => 1, 'some_key' => 'some_value']];
         yield [['lastName' => 22, 'xpto' => 5487]];
+        yield [['lastName' => 22, 'password' => 'xpto']];
         yield [[]];
     }
 }

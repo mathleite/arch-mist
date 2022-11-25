@@ -2,6 +2,9 @@
 
 namespace Mathleite\PhpArch\api\common;
 
+use Mathleite\PhpArch\api\common\interfaces\AuthenticateInterface;
+use Mathleite\PhpArch\api\common\services\PasswordService;
+
 abstract class AbstractModel
 {
     /**
@@ -10,7 +13,7 @@ abstract class AbstractModel
      */
     protected array $fillables = [];
 
-    public function __construct(array $properties)
+    public function __construct(array $properties = [])
     {
         $this->fill($properties);
     }
@@ -21,8 +24,7 @@ abstract class AbstractModel
          * @var mixed $property
          * @var mixed $propertyValue
          */
-        foreach ($properties as $property => $propertyValue)
-        {
+        foreach ($properties as $property => $propertyValue) {
             if (
                 !property_exists(static::class, $property)
                 || !$this->isFillable($property)
@@ -30,6 +32,12 @@ abstract class AbstractModel
                 continue;
             }
 
+            $interfaces = class_implements(static::class);
+            if ($property === 'password' && in_array(AuthenticateInterface::class, $interfaces)) {
+                $passwordHashProperty = 'passwordHash';
+                $this->$passwordHashProperty = (new PasswordService())->createHash($propertyValue);
+                continue;
+            }
             $this->$property = $propertyValue;
         }
     }
