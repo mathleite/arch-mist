@@ -5,8 +5,10 @@ namespace Mathleite\PhpArch\api\common\responses;
 use Mathleite\PhpArch\api\common\interfaces\ControllerResponseInterface;
 use Mathleite\PhpArch\api\common\Singleton;
 
-final class JsonResponse extends Singleton implements ControllerResponseInterface
+final class JsonResponse implements ControllerResponseInterface
 {
+    use Singleton;
+
     private array $data = [];
 
     private int $statusCode = 200;

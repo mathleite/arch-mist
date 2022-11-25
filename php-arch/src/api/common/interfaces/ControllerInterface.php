@@ -2,9 +2,8 @@
 
 namespace Mathleite\PhpArch\api\common\interfaces;
 
-use Mathleite\PhpArch\api\common\responses\JsonResponse;
-
 interface ControllerInterface
 {
-    public function index(): JsonResponse;
+    public function index(): ControllerResponseInterface;
+    public function create(RequestInterface $request): ControllerResponseInterface;
 }
