@@ -2,22 +2,22 @@
 
 namespace Mathleite\PhpArch\api\user\service;
 
+use Mathleite\PhpArch\api\common\interfaces\RepositoryInterface;
 use Mathleite\PhpArch\api\common\interfaces\RequestInterface;
 use Mathleite\PhpArch\api\user\model\UserModel;
-use Mathleite\PhpArch\api\user\repository\UserRepository;
 
 class UserService
 {
+    public function __construct(private readonly RepositoryInterface $repository) {}
+
     public function getAllUsers(): array
     {
-        $repository = new UserRepository();
-        return $repository->getAll();
+        return $this->repository->getAll();
     }
 
     public function createUser(RequestInterface $request): bool
     {
         $user = new UserModel($request->getBody());
-        $repository = new UserRepository();
-        return $repository->insert($user);
+        return $this->repository->insert($user);
     }
 }

@@ -12,7 +12,7 @@ class DatabaseFactory
     {
         return match ($databaseType) {
             DatabaseTypeEnum::NOSQL, DatabaseTypeEnum::SQL => throw new \Exception('To be implemented'),
-            default => MemoryDatabaseDriver::getInstance()
+            default => new MemoryDatabaseDriver()
         };
     }
 }

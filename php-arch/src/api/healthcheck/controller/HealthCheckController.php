@@ -16,7 +16,7 @@ class HealthCheckController implements ControllerInterface
             ->setStatusCode(200);
     }
 
-    public function create(RequestInterface $request): ControllerResponseInterface
+    public function create(?RequestInterface $request): ControllerResponseInterface
     {
         return JsonResponse::getInstance()
             ->setData(['message' => 'Not found'])
