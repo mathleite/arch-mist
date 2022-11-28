@@ -7,6 +7,7 @@ use Mathleite\PhpArch\api\common\interfaces\ControllerResponseInterface;
 use Mathleite\PhpArch\api\common\interfaces\RequestInterface;
 use Mathleite\PhpArch\api\common\responses\JsonResponse;
 use Mathleite\PhpArch\api\user\model\UserModel;
+use Mathleite\PhpArch\api\user\service\UserService;
 
 class AuthController implements ControllerInterface
 {
@@ -14,15 +15,17 @@ class AuthController implements ControllerInterface
     {
         $user = new UserModel();
         return JsonResponse::getInstance()
-            ->setData($user->toArray())
-            ->setStatusCode(201);
+            ->setData((new UserService())->getAllUsers())
+            ->setStatusCode(200);
     }
 
     public function create(RequestInterface $request): ControllerResponseInterface
     {
-        $user = new UserModel($request->getBody());
         return JsonResponse::getInstance()
-            ->setData($user->toArray())
+            ->setData([
+                'success' => (new UserService())->createUser($request),
+                'data' => (new UserService())->getAllUsers()
+            ])
             ->setStatusCode(201);
     }
 }
