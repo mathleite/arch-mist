@@ -9,12 +9,7 @@ use Mathleite\PhpArch\database\memory\RawMemoryQuery;
 
 class UserRepository implements RepositoryInterface
 {
-    private DatabaseDriverInterface $database;
-
-    public function __construct(DatabaseDriverInterface $database)
-    {
-        $this->database = $database;
-    }
+    public function __construct(private readonly DatabaseDriverInterface $database) {}
 
     public function insert(AbstractModel $model): bool
     {

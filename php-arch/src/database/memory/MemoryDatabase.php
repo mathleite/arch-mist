@@ -13,7 +13,7 @@ class MemoryDatabase
         $this->validateDatabase();
 
         $now = date('Y-m-d H:i:s');
-        $id = uniqid(self::class);
+        $id = uniqid($this->databaseName);
         $_SESSION[$this->databaseName][$id] = [
             'uuid' => $id,
             'data' => $memoryQuery->getModel()->toArray(),

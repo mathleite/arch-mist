@@ -3,6 +3,7 @@
 namespace Mathleite\PhpArch\api\common;
 
 use Mathleite\PhpArch\api\common\interfaces\AuthenticateInterface;
+use Mathleite\PhpArch\api\common\models\Email;
 use Mathleite\PhpArch\api\common\services\PasswordService;
 
 abstract class AbstractModel
@@ -38,6 +39,12 @@ abstract class AbstractModel
                 $this->$passwordHashProperty = (new PasswordService())->createHash($propertyValue);
                 continue;
             }
+
+            if ($property === 'email') {
+                $this->$property = new Email($propertyValue);
+                continue;
+            }
+
             $this->$property = $propertyValue;
         }
     }
