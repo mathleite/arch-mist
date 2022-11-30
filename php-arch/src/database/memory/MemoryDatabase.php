@@ -11,15 +11,8 @@ class MemoryDatabase
     public function insertQuery(RawMemoryQuery $memoryQuery): bool
     {
         $this->validateDatabase();
-
-        $now = date('Y-m-d H:i:s');
-        $id = uniqid($this->databaseName);
-        $_SESSION[$this->databaseName][$id] = [
-            'uuid' => $id,
-            'data' => $memoryQuery->getModel()->toArray(),
-            'created_at' => $now,
-            'updated_at' => $now,
-        ];
+        $structure = $memoryQuery->getInsertStructure();
+        $_SESSION[$this->databaseName][$structure->getUuid()] = $structure->toArray();
         return true;
     }
 

@@ -2,7 +2,7 @@
 
 namespace Mathleite\PhpArch\api\auth\controller;
 
-use Mathleite\PhpArch\api\common\interfaces\ControllerInterface;
+use Mathleite\PhpArch\api\auth\interfaces\ControllerInterface;
 use Mathleite\PhpArch\api\common\interfaces\ControllerResponseInterface;
 use Mathleite\PhpArch\api\common\interfaces\RequestInterface;
 use Mathleite\PhpArch\api\common\responses\JsonResponse;
@@ -45,5 +45,12 @@ class AuthController implements ControllerInterface
                 'data' => $this->service->getAllUsers()
             ])
             ->setStatusCode(201);
+    }
+
+    public function login(RequestInterface $request): ControllerResponseInterface
+    {
+        return JsonResponse::getInstance()
+            ->setData($this->service->getUser($request))
+            ->setStatusCode(200);
     }
 }

@@ -18,7 +18,7 @@ $router = RouterFactory::construct(RouterEnum::SIMPLE);
 
 $router->registry('/health-check', HealthCheckController::class, 'index');
 $router->registry('/auth/signup', AuthController::class, 'create');
-$router->registry('/auth/login', AuthController::class, 'index');
+$router->registry('/auth/login', AuthController::class, 'login');
 
 if ($request = detectRequestBody()) {
     $requestData = new Request(json_decode($request, true));

@@ -2,8 +2,8 @@
 
 namespace Mathleite\PhpArch\api\user\model;
 
-use Mathleite\PhpArch\api\common\AbstractModel;
 use Mathleite\PhpArch\api\common\interfaces\AuthenticateInterface;
+use Mathleite\PhpArch\api\common\models\AbstractModel;
 use Mathleite\PhpArch\api\common\models\Email;
 
 class UserModel extends AbstractModel implements AuthenticateInterface

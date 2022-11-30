@@ -2,7 +2,7 @@
 
 namespace Mathleite\PhpArch\api\common\interfaces;
 
-use Mathleite\PhpArch\api\common\AbstractModel;
+use Mathleite\PhpArch\api\common\models\AbstractModel;
 
 interface RepositoryInterface
 {

@@ -2,8 +2,8 @@
 
 namespace Mathleite\PhpArch\api\user\repository;
 
-use Mathleite\PhpArch\api\common\AbstractModel;
 use Mathleite\PhpArch\api\common\interfaces\RepositoryInterface;
+use Mathleite\PhpArch\api\common\models\AbstractModel;
 use Mathleite\PhpArch\database\interfaces\DatabaseDriverInterface;
 use Mathleite\PhpArch\database\memory\RawMemoryQuery;
 
